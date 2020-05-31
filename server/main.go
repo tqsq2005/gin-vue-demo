@@ -5,11 +5,32 @@ import (
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"github.com/tqsq2005/gin-vue/model"
+	"github.com/tqsq2005/gin-vue/pkg/logging"
+	. "github.com/tqsq2005/gin-vue/pkg/setting"
+	"time"
 )
 
+func init() {
+	//step1：读取配置文件 通过导入读取
+	//step2：连接数据库
+	//model.InitDB()
+	//step3：启动日志
+	logging.InitLog()
+	//step4：启动redis
+
+	//step5：其他
+	//util.InitUtil()
+}
+
 func main() {
+	//logging.Logger.Warnln("something is here,", time.Now())
+	logging.AppLog.Warnln("something is here,", time.Now())
+	logging.SQLLog.Warnln("something is here,", time.Now())
+}
+
+func runServer()  {
 	r := gin.Default()
-	r.GET("/api/user/register", func(c *gin.Context) {
+	r.POST("/api/user/register", func(c *gin.Context) {
 		//接受数据
 		user := model.User{}
 		err := c.Bind(&user)
@@ -29,5 +50,5 @@ func main() {
 		log.Infoln(result)
 		c.JSON(200, user)
 	})
-	log.Fatalln(r.Run()) // 监听并在 0.0.0.0:8080 上启动服务
+	log.Fatalln(r.Run(Config.Server.Port)) // 监听并在 0.0.0.0:8080 上启动服务
 }

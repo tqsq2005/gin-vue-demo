@@ -1,0 +1,30 @@
+app:
+  name: gin-vue-demo
+  mode: debug
+  pageSize: 10
+  jwtSecret: locoroco
+  jwtTokenTimeout: 60
+  prefixUrl: http://127.0.0.1:8088
+  runtimeRootPath: /runtime/
+
+log:
+  logSavePath: logs/
+  logSaveName: log_
+  logFileExt: log
+  timeFormat: 20060102
+
+server:
+  port: 8088
+  readTimeout: 60
+  writeTimeout: 60
+
+dataSource:
+  driveName: mysql
+  host: 192.168.43.128 #192.168.43.128
+  database: gin
+  username: root
+  password: root
+  port: 3306
+  charset: utf8
+  loc: Asia/Shanghai
+  tablePrefix: lc_
